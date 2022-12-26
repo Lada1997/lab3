@@ -1,0 +1,71 @@
+postgres=# CREATE DATABASE mtuci_mn;
+CREATE DATABASE
+postgres=# \c mtuci_mn
+mtuci_mn=# create table cafedr(id serial primary key, cafedr_name varchar not null unique, dekanat_name varchar not null);
+CREATE TABLE
+mtuci_mn=# insert into cafedr (cafedr_name, dekanat_name) values ('ИБ','КиИБ');
+INSERT 0 1
+mtuci_mn=# insert into cafedr (cafedr_name, dekanat_name) values ('ТЭОД','КиИБ');
+INSERT 0 1
+mtuci_mn=# select * from cafedr;
+ id | cafedr_name | dekanat_name
+----+-------------+--------------
+  1 | ИБ          | КиИБ
+  2 | ТЭОД        | КиИБ
+(2 ёЄЁюъш)
+tuci_mn=# create table student_group (id serial primary key, numb varchar not null unique, cafedr varchar references cafedr(cafedr_name));
+CREATE TABLE
+mtuci_mn=# insert into student_group (numb, cafedr) values ('БИН2202', 'ИБ');
+INSERT 0 1
+mtuci_mn=# insert into student_group (numb, cafedr) values ('БИН2203', 'ИБ');
+INSERT 0 1
+mtuci_mn=# insert into student_group (numb, cafedr) values ('БСТ2202', 'ТЭОД');
+INSERT 0 1
+mtuci_mn=# insert into student_group (numb, cafedr) values ('БСТ2203', 'ТЭОД');
+INSERT 0 1
+mtuci_mn=# select * from student_group;
+ id |  numb   | cafedr
+----+---------+--------
+  1 | БИН2202 | ИБ
+  2 | БИН2203 | ИБ
+  3 | БСТ2202 | ТЭОД
+  4 | БСТ2203 | ТЭОД
+(4 ёЄЁюъш)
+mtuci_mn=# create table student (id serial primary key, full_name varchar not null, passpart varchar(6) not null, group_numb varchar references student_group(numb));
+CREATE TABLE
+mtuci_mn=# insert into student (full_name, passpart, group_numb) values ('Мисловский Дмитрий Васильевич', '133457', 'БИН2202');
+INSERT 0 1
+mtuci_mn=# insert into student (full_name, passpart, group_numb) values ('Мисловский Дмитрий Васильевич', '133457', 'БИН2202');
+INSERT 0 1
+mtuci_mn=# insert into student (full_name, passpart, group_numb) values ('Мисловский Дмитрий Васильевич', '096124', 'БИН2202');
+INSERT 0 1
+mtuci_mn=# insert into student (full_name, passpart, group_numb) values ('Мисловский Дмитрий Васильевич', '812567', 'БИН2203');
+INSERT 0 1
+mtuci_mn=# insert into student (full_name, passpart, group_numb) values ('Мисловский Дмитрий Васильевич', '375120', 'БИН2203');
+INSERT 0 1
+mtuci_mn=# insert into student (full_name, passpart, group_numb) values ('Мисловский Дмитрий Васильевич', '098712', 'БИН2203');
+INSERT 0 1
+mtuci_mn=# insert into student (full_name, passpart, group_numb) values ('Хлыбова Екатерина Валерьевна', '654738', 'БСТ2203');
+INSERT 0 1
+mtuci_mn=# insert into student (full_name, passpart, group_numb) values ('Куликова Ольга Александровна', '875622', 'БИН2203');
+INSERT 0 1
+mtuci_mn=# insert into student (full_name, passpart, group_numb) values ('Волков Иван Гинадьевич', '764751', 'БСТ2203');
+INSERT 0 1
+mtuci_mn=# insert into student (full_name, passpart, group_numb) values ('Галицкая Анастасия Семёновна', '653637', 'БСТ2202');
+INSERT 0 1
+mtuci_mn=# insert into student (full_name, passpart, group_numb) values ('Певчий Андрей Борисович', '113389', 'БСТ2202');
+INSERT 0 1
+mtuci_mn=# select * from student;
+ id |           full_name           | passpart | group_numb
+----+-------------------------------+----------+------------
+  1 | Мисловский Дмитрий Васильевич | 133457   | БИН2202
+  2 | Мисловский Дмитрий Васильевич | 133457   | БИН2202
+  3 | Мисловский Дмитрий Васильевич | 096124   | БИН2202
+  4 | Мисловский Дмитрий Васильевич | 812567   | БИН2203
+  5 | Мисловский Дмитрий Васильевич | 375120   | БИН2203
+  6 | Мисловский Дмитрий Васильевич | 098712   | БИН2203
+  7 | Хлыбова Екатерина Валерьевна  | 654738   | БСТ2203
+  8 | Куликова Ольга Александровна  | 875622   | БИН2203
+  9 | Волков Иван Гинадьевич        | 764751   | БСТ2203
+ 10 | Галицкая Анастасия Семёновна  | 653637   | БСТ2202
+ 11 | Певчий Андрей Борисович       | 113389   | БСТ2202
